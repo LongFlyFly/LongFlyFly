@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "百年老店",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "usingComponents": {
+    "index-swiper": "/components/index/indexSwiper",
+    "recommed": "/components/index/Recommed",
+    "card": "/components/common/Card",
+    "commodity-list": "/components/common/CommodityList",
+    "banner": "/components/index/Banner",
+    "icons": "/components/index/Icons",
+    "hot": "/components/index/Hot",
+    "shop": "/components/index/Shop"
+  }
+}

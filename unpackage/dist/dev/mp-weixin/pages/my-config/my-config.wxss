@@ -1,0 +1,18 @@
+
+.config-item.data-v-0806c78e{
+		display: flex;
+		justify-content: space-between;
+		padding: 20rpx 0 20rpx 20rpx;
+		border-bottom: 2rpx solid #CCCCCC;
+}
+.my-exit.data-v-0806c78e{
+	background-color: #00ffff;
+	width: 100%;
+	line-height: 80rpx;
+	color: white;
+	text-align: center;
+}
+.config-mark.data-v-0806c78e{
+	padding-right: 10rpx;
+}
+

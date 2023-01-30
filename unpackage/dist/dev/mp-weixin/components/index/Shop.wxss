@@ -1,0 +1,14 @@
+
+.shop-big.data-v-aaa41fa4{
+	width: 100%;
+	height: 350rpx;
+}
+.scroll-item.data-v-aaa41fa4{
+	display: inline-block;
+}
+.scroll-content.data-v-aaa41fa4{
+	width: 100%;
+	/* 不换行 */
+	white-space: nowrap;
+}
+

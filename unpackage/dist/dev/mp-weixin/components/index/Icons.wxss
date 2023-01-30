@@ -1,0 +1,20 @@
+
+.icons.data-v-4d8061dc{
+	display: flex;
+	flex-wrap: wrap;
+}
+.icons-img.data-v-4d8061dc{
+	width: 110rpx;
+	height: 110rpx;
+}
+.icons-item.data-v-4d8061dc{
+	width: 25%;
+	display: flex;
+	/* 垂直 */
+	flex-direction: column;
+	/* 垂直水平居中 */
+	align-items: center;
+	justify-content: center;
+	padding-top:20rpx ;
+}
+

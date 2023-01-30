@@ -1,0 +1,46 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* swiper默认150px的高度 */
+swiper.data-v-3ed827fc{
+	width: 100%;
+	height: 400rpx;
+}
+.swiper-img.data-v-3ed827fc{
+	width: 100%;
+	/* 用rpx单位 */
+	height: 400rpx;
+}
+

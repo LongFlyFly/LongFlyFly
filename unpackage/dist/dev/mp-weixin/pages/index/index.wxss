@@ -1,0 +1,21 @@
+
+.scroll-content{
+	width: 100%;
+	height: 80rpx;
+	white-space: nowrap;
+}
+.scroll-item{
+	display: inline-block;
+	padding: 10rpx 30rpx;
+	font-size: 36rpx;
+}
+.f-active-color{
+	padding: 10rpx 0;
+	border-bottom: 6rpx solid #00ffff;
+}
+.load-text{
+	border-top: 2rpx solid black;
+	line-height: 60rpx;
+	text-align: center;
+}
+

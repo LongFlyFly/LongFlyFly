@@ -1,0 +1,42 @@
+
+.pay-item{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20rpx;
+	border-bottom: 2rpx solid #CCCCCC;
+}
+.pay-txt{
+	color: #d6d6d6;
+}
+.pay-img{
+	width: 100rpx;
+	height: 100rpx;
+}
+.total-price{
+	color: white;
+}
+.pay-foot{
+	width: 100%;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: 100rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.total{
+	padding-left: 100rpx;
+	flex:1 ;
+	line-height: 100rpx;
+	background-color: black;
+}
+.go-pay{
+	color: white;
+	background-color: aqua;
+	line-height: 100rpx;
+	text-align: center;
+	width: 220rpx;
+}
+

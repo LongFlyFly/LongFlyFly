@@ -1,0 +1,36 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3543841 */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gouwuche2:before {
+  content: "\e600";
+}
+
+.icon-lajitong:before {
+  content: "\e615";
+}
+
+.icon-shangjiantou:before {
+  content: "\e601";
+}
+
+.icon-xiajiantou:before {
+  content: "\e602";
+}
+
+.icon-xiaoxi:before {
+  content: "\e616";
+}
+
+.icon-Magnifier:before {
+  content: "\e62d";
+}
+

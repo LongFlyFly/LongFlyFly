@@ -1,0 +1,71 @@
+
+.login-tel.data-v-b237504c{
+	width: 100vw;
+	height: 100vh;
+}
+.tel-main.data-v-b237504c{
+	padding: 0 20rpx;
+}
+.close.data-v-b237504c{
+	padding:120rpx 0;
+}
+.close-img.data-v-b237504c{
+	width: 60rpx;
+	height: 60rpx;
+}
+.logo.data-v-b237504c{
+	padding-bottom :100rpx;
+	display: flex;
+	justify-content: center;
+}
+.tel.data-v-b237504c{
+	width: 100%;
+	height: 80rpx;
+	line-height: 80rpx;
+	text-align: center;
+	color: #ffffff;
+	background-color: aqua;
+	border-radius: 40rpx;
+}
+/* 去登陆 */
+.login-go.data-v-b237504c{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.login-go image.data-v-b237504c{
+	width: 60rpx;
+	height: 60rpx;
+}
+/* 第二屏 */
+.close-center.data-v-b237504c{
+	display: flex;
+}
+.close-center>view.data-v-b237504c{
+	flex:1;
+}
+.login-from.data-v-b237504c{
+	padding-top: 100rpx;
+}
+.login-user.data-v-b237504c{
+	font-size: 32rpx;
+	padding: 10rpx 0;
+	display: flex;
+	align-items: center;
+	border-bottom: 2rpx solid #f7f7f7;
+}
+.user-text.data-v-b237504c{
+	padding-right: 10rpx;
+}
+.login-quict.data-v-b237504c{
+	display: flex;
+	justify-content: space-between;
+	padding: 20rpx 0;
+}
+.reminder.data-v-b237504c{
+	color:#cccccc;
+	padding: 20rpx 0;
+	text-align: center;
+}
+

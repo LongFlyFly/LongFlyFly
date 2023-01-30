@@ -1,0 +1,65 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 其它登录方式的样式 */
+.login-other.data-v-35e62b5b{
+	padding: 100rpx 0;
+}
+.other-text.data-v-35e62b5b{
+	display: flex;
+	padding: 50rpx 0;
+}
+.other-text view.data-v-35e62b5b{
+	line-height: 0rpx;
+	padding: 0 10rpx;
+}
+.other-text.data-v-35e62b5b:after{
+	flex: 1;
+	content: '';
+	height: 2rpx;
+	background-color: #cccccc;
+}
+.other-text.data-v-35e62b5b::before{
+	flex: 1;
+	content: '';
+	height: 2rpx;
+	background-color: #cccccc;
+}
+.other.data-v-35e62b5b{
+	display: flex;
+	justify-content: space-between;
+}
+.other-item.data-v-35e62b5b{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.other-item image.data-v-35e62b5b{
+	width: 80rpx;
+	height: 80rpx;
+}
+

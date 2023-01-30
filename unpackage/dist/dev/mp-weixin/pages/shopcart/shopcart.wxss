@@ -1,0 +1,68 @@
+
+.shop-list.data-v-0d48e174{
+	padding-bottom: 100rpx;
+}
+.shop-else-list.data-v-0d48e174{
+	background-color: #c5c5c5;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.shop-item.data-v-0d48e174{
+	display: flex;
+	padding: 20rpx;
+	align-items: center;
+	background-color: #f7f7f7;
+	margin-bottom: 10rpx;
+}
+.shop-img.data-v-0d48e174{
+	width: 200rpx;
+	height: 200rpx;
+}
+.shop-text.data-v-0d48e174{
+	flex: 1;
+	padding-left: 20rpx;
+}
+.shop-color.data-v-0d48e174{
+	font-size: 24rpx;
+}
+.shop-price.data-v-0d48e174{
+	display: flex;
+	justify-content: space-between;
+}
+.shop-foots.data-v-0d48e174{
+	border-top: 2rpx solid #c5c5c5;
+	background-color: white;
+	position: fixed;
+	/* app和网页有区别 ,app bottom应该为0*/
+	bottom: 100rpx;
+	left: 0;
+	width: 100%;
+	height: 100rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.foot-radio.data-v-0d48e174{
+	padding-left: 20rpx;
+}
+.foot-total.data-v-0d48e174{
+		display: flex;
+}
+.foot-count.data-v-0d48e174{
+	line-height: 100rpx;
+	padding: 0 20rpx;
+	font-size: 32rpx;
+}
+.foot-num.data-v-0d48e174{
+	background-color: #00ffff;
+	color: white;
+	padding: 0 60rpx;
+	line-height: 100rpx;
+}
+

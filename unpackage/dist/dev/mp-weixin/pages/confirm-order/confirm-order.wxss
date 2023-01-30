@@ -1,0 +1,70 @@
+
+.config-order.data-v-2f2cf9ec{
+	position: absolute;
+	left:0;
+	top: 0;
+	right: 0;
+	bottom:0;
+	width: 100%;
+	height: 100%;
+}
+.order-map.data-v-2f2cf9ec{
+	padding:20rpx;
+	background-color: white;
+	line-height: 40rpx;
+}
+.map-title.data-v-2f2cf9ec{
+	display: flex;
+	justify-content: space-between;
+}
+.map-name.data-v-2f2cf9ec{
+	font-weight: bold;
+}
+.goods-name.data-v-2f2cf9ec{
+		font-size: 26rpx;
+}
+.goods-text.data-v-2f2cf9ec{
+		width: 300rpx;
+		padding: 0 10rpx;
+		font-size: 26rpx;
+}
+.goods-size.data-v-2f2cf9ec{
+		font-size: 24rpx;
+}
+.goods-img.data-v-2f2cf9ec{
+		width: 160rpx;
+		height: 160rpx;
+}
+.goods-content.data-v-2f2cf9ec{
+		background-color: #ededed;
+		padding: 10rpx 20rpx;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 20rpx;
+}
+.goods-list.data-v-2f2cf9ec{
+		margin-top: 20rpx;
+		background-color: white;
+		padding: 20rpx;
+}
+.order-foot.data-v-2f2cf9ec{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		background-color: white;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		width: 100%;
+		height: 80rpx;
+}
+.comfirm.data-v-2f2cf9ec{
+		color: white;
+		background-color: aqua;
+		padding: 10rpx 30rpx;
+}
+.totle-price.data-v-2f2cf9ec{
+		padding: 0 20rpx;
+}
+

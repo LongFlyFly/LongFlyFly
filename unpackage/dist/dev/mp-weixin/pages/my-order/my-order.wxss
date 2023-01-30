@@ -1,0 +1,53 @@
+
+.no-order.data-v-143b2126{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+.no-order-home.data-v-143b2126{
+	padding: 6rpx 60rpx;
+	border: 2rpx solid  #00ffff;
+	color: #00ffff;
+	border-radius: 40rpx;
+}
+.payment.data-v-143b2126{
+	display: flex;
+	justify-content: flex-end;
+	background-color: #ffffff;
+	padding: 20rpx;
+}
+.payment-text.data-v-143b2126{
+	border: 2rpx solid #00ffff;
+	padding: 6rpx 40rpx;
+	border-radius: 30rpx;
+}
+.total-price.data-v-143b2126{
+		padding: 20rpx;
+		display: flex;
+		/* 居右 */
+		justify-content: flex-end;
+		background-color: #ffffff;
+}
+.goods-status.data-v-143b2126{
+	display: flex;
+	justify-content: flex-end;
+	background-color: white;
+	padding: 20rpx;
+}
+.order-header.data-v-143b2126{
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 2rpx solid #d2d2d2;
+}
+.header-item.data-v-143b2126{
+	text-align: center;
+	flex: 1;
+	line-height: 120rpx;
+}
+.active.data-v-143b2126{
+	border-bottom: 4rpx solid #00ffff;
+}
+

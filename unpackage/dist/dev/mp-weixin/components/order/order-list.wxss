@@ -1,0 +1,24 @@
+
+.goods-name{
+	font-size: 26rpx;
+}
+.goods-text{
+	width: 300rpx;
+	padding: 0 10rpx;
+	font-size: 26rpx;
+}
+.goods-size{
+	font-size: 24rpx;
+}
+.goods-img{
+	width: 160rpx;
+	height: 160rpx;
+}
+.goods-content{
+	background-color: #ededed;
+	padding: 10rpx 20rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+

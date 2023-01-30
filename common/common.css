@@ -1,0 +1,28 @@
+/* 全局css文件 */
+
+
+/* 默认字体颜色 */
+.f-color{
+	color: #555555;
+}
+/* 选中字体颜色 */
+.f-active-color{
+	color: #00ffff;
+}
+/* 背景颜色 */
+.bg-color{
+	background-color: #00f3ff;
+}
+/* 默认背景颜色 */
+.bg-active-color{
+	background-color: #dadada;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar{
+	display: none;
+	width: 0!important;
+	height: 0!important;
+	-webkit-appearance:none;
+	background: transparent;
+}

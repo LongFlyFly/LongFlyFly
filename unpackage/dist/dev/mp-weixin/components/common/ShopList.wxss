@@ -1,0 +1,29 @@
+
+.shop-title.data-v-9687dfe6{
+	display: flex;
+}
+.shop-item.data-v-9687dfe6{
+	flex:1;
+	display: flex;
+	/* 水平垂直居中 */
+	justify-content: center;
+	align-items: center;
+	height: 80rpx;
+}
+.shop-icon.data-v-9687dfe6{
+	position: relative;
+	margin-left: 10rpx;
+}
+.iconfont.data-v-9687dfe6{
+	width: 16rpx;
+	height: 20rpx;
+	position: absolute;
+	left: 0;
+}
+.up.data-v-9687dfe6{
+	top: -24rpx;
+}
+.down.data-v-9687dfe6{
+	top: -4rpx;
+}
+
