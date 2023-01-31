@@ -14,7 +14,7 @@
 		},
 		methods: {
 			goIndex(){
-				uni.switchTab({
+				uni.navigateTo({
 					url:'/pages/index/index'
 				})
 			}

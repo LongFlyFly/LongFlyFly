@@ -152,7 +152,7 @@
 				let newList = [];
 				this.list.forEach(item=>{
 					this.selectedList.filter(v=>{
-						if(item.id == v){
+						if(item.goods_id == v){
 							newList.push(item);
 						}
 					})

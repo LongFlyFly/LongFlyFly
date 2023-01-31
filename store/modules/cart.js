@@ -17,9 +17,9 @@ export default{
 			}
 			state.list.forEach(v=>{
 				// 是否是选中状态
-				if(state.selectedList.indexOf(v.id)>-1){
+				if(state.selectedList.indexOf(v.goods_id)>-1){
 					// 合计
-					total.pprice += v.pprice*v.num
+					total.pprice += v.pprice * v.num
 					// 结算数量
 					total.num = state.selectedList.length
 				}
@@ -36,7 +36,7 @@ export default{
 		checkAll(state){
 			state.selectedList = state.list.map(v=>{
 				v.checked = true;
-				return v.id
+				return v.goods_id
 			})
 		},
 		// 全不选和不全选
@@ -48,7 +48,7 @@ export default{
 		},
 		// 单选
 		selectedItem(state,index){
-			let id = state.list[index].id
+			let id = state.list[index].goods_id
 			let i = state.selectedList.indexOf(id)
 			// 如果已经存在，代表是选中状态，移除
 			if(i>-1){
@@ -61,7 +61,7 @@ export default{
 		},
 		delGoods(state){
 			state.list = state.list.filter(v=>{
-				return state.selectedList.indexOf(v.id)
+				return state.selectedList.indexOf(v.goods_id)
 			})
 		},
 		// 加入购物车
@@ -98,7 +98,6 @@ export default{
 					})
 				}
 			})
-			
 			
 		}
 	}

@@ -277,6 +277,15 @@
 		        "enablePullDownRefresh": false
 		    }
 		}
+        ,{
+            "path" : "pages/waitPay/waitPay",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "待付款",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

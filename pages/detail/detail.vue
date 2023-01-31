@@ -83,8 +83,8 @@
 				
 				num:1,
 				dataList:[
-					{id:9,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i4/26958996/O1CN01ZauIfo2GKDiHk1DLo_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",name:"复古小群",pprice:"329",oprice:"659",discount:"5.5"},
-					{id:10,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/i3/2056385669/O1CN01HIr5za1rkS6WctNFY_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"连衣裙",pprice:"59",oprice:"99",discount:"5.6"}
+					{Id:9,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i4/26958996/O1CN01ZauIfo2GKDiHk1DLo_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",name:"复古小群",pprice:"329",oprice:"659",discount:"5.5"},
+					{Id:10,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/i3/2056385669/O1CN01HIr5za1rkS6WctNFY_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"连衣裙",pprice:"59",oprice:"99",discount:"5.6"}
 				]
 			}
 		},
@@ -134,6 +134,10 @@
 			showCollect(e){
 				// console.log(e)
 				this.$store.commit('collects',e);
+				uni.showToast({
+					title:'收藏成功',
+					icon:'none'
+				})
 			},
 			// 改变商品数量
 			changeNumber(value){

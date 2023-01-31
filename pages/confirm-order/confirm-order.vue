@@ -63,7 +63,7 @@
 			//根据商品列表筛选,数据的id
 			goodsList(){
 				return this.item?.map(id=>{
-					return this.list.find( v => v.id == id)
+					return this.list.find( v => v.goods_id == id)
 				})
 			}
 		},
@@ -84,7 +84,6 @@
 					icon:'none'
 				})
 			})
-			
 			
 			// 选中的商品id
 			this.item = JSON.parse(e.detail)
@@ -116,7 +115,6 @@
 						icon:"none"
 					})
 				}
-				console.log(this.selectedList,111)
 				//创建一个订单
 				$http.request({
 					url:"/submitOrder",

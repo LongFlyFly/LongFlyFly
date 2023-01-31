@@ -20,9 +20,18 @@ router.all("*", function(req, res, next) {
 router.get('/',function(req,res,next){
 	res.render('index',{title:'Express'});
 });
+
+// 待支付
+router.post('/api/waitPay',function(req,res,next){
+		connection.query("select * from store_order", function (err, result){
+			res.send({
+				data:result
+			})
+		})
+});
+
 //修改订单
 router.post('/api/submitOrder',function(req,res,next){
-	console.log(req.body,1111)
 	//订单号
 	let orderId = req.body.orderId;
 	//购物车中选中的商品
@@ -30,12 +39,15 @@ router.post('/api/submitOrder',function(req,res,next){
 	connection.query(`select * from store_order where order_id = ${orderId}`,function(err,result){
 		//订单的id
 		let id = result[0].id
-		connection.query(`update store_order set order_status = replace(order_status,'1','2') where id=${id}`,function(){
-			shopArr.forEach(v=>{
-				connection.query(`delete from goods_cart where id = ${v}`,function(){
+		connection.query(`update store_order set order_status = replace(order_status,'1','2') where order_id=${id}`,function(){
+			// shopArr.forEach(v=>{
+				connection.query(`delete from goods_cart where goods_id = ${shopArr}`,function(){
 					
 				})
-			})
+				connection.query(`delete from store_order where order_id = ${orderId}`,function(){
+					
+				})
+			// })
 			res.send({
 				data:{
 					code:200,
@@ -96,15 +108,13 @@ router.post('/api/addOrder',function(req,res,next){
 //删除购物车
 router.post('/api/deleteCart',function(req,res,next){
 	let goodsId = req.body.goodsId;
-	for(var i=0;i<=goodsId.length;i++){
-		connection.query(`delete * from goods_cart where id=${goodsId[i]}`,function(e,r){
+		connection.query(`delete  from goods_cart where goods_id=${goodsId}`,function(e,r){
 			res.json({
 				data:{
 					success:true
 				}
 			})
 		})
-	}
 })
 
 // 加入购物车
@@ -112,17 +122,16 @@ router.post('/api/addCart',function(req,res,next){
 	let goods_id = req.body.goods_id;
 	// 用户输入的商品数量
 	let num = req.body.num
+	
 	connection.query("select * from goods_search where id='"+goods_id+"'", function (err, result){
-		
 		let name = result[0].name;
 		let imgUrl = result[0].imgUrl;
 		let pprice = result[0].pprice;
 		// 查询当前用户之前是否添加过
 		connection.query("select * from goods_cart where goods_id='"+goods_id+"'", function (err, data){
-			
 			if(data.length>0){
 				// 如果当前用户已经添加，则修改
-				connection.query("update goods_cart set num = replace(num,'"+data[0].num+"','"+  parseInt(num)+parseInt(data[0].num)  +"') where id = '"+data[0].num+"' ",function(er,rs){
+				connection.query("update goods_cart set num = replace(num,'"+data[0].num+"','"+  parseInt(num)+parseInt(data[0].num)  +"') where id = '"+goods_id+"' ",function(er,rs){
 					res.json({
 						data:{
 							success:"修改成功！"
@@ -184,7 +193,7 @@ router.post('/api/updateAdderss',function(req,res,next){
 	let address = req.body.address
 	let isDefault = req.body.isDefault
 	let id = req.body.id
-	connection.query('update address set name = "'+name+'",tel = "'+tel+'",province = "'+province+'",city = "'+city+'",district = "'+district+'",address = "'+address+'",isDefault = "'+isDefault+'" where id = "'+id+'" ', function (err, result){
+	connection.query('update address set name = "'+name+'",tel = "'+tel+'",province = "'+province+'",city = "'+city+'",district = "'+district+'",address = "'+address+'",isDefault = "'+isDefault+'" where Id = "'+id+'" ', function (err, result){
 			res.send({
 				data:{
 					success:"成功"
@@ -530,47 +539,6 @@ router.get('/api/index_list/2/data/1', function(req, res, next) {
 			   ]
 		   },
 		   
-		   // {
-		   // 			   type:"bannerList",
-		   // 			   imgUrl:"../../static/img/banner-2.jpg"
-		   // },
-		   // {
-		   // 			   type:"iconsList",
-		   // 			   data:[
-		   // 				    {imgUrl:"../../static/img/tab-1.png", name:"运动户外"},
-		   // 					{imgUrl:"../../static/img/tab-2.png", name:"运动户外"},
-		   // 					{imgUrl:"../../static/img/tab-3.png", name:"运动户外"},
-		   // 					{imgUrl:"../../static/img/tab-4.png", name:"运动户外"},
-		   // 					{imgUrl:"../../static/img/tab-1.png", name:"运动户外"},
-		   // 					{imgUrl:"../../static/img/tab-2.png", name:"运动户外"},
-		   // 					{imgUrl:"../../static/img/tab-3.png", name:"运动户外"},
-		   // 					{imgUrl:"../../static/img/tab-4.png", name:"运动户外"}
-		   // 			   ]
-		   // },
-		   // {
-		   // 			   type:"hotList",
-		   // 			   data:[
-		   // 				  {id:1,imgUrl:"../../static/img/chao-1.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"},
-		   // 				  {id:2,imgUrl:"../../static/img/chao-2.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"},
-		   // 				  {id:3,imgUrl:"../../static/img/chao-3.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"}
-		   // 			   ]
-		   // },
-		   // {
-		   // 			   type:"shopList",
-		   // 			   data:[
-		   // 				   {
-		   // 				   		bigUrl:"../../static/img/new-1.png",
-		   // 				   data:[
-		   // 				      	{id:1,imgUrl:"../../static/img/chao-1.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"},
-		   // 				      	{id:2,imgUrl:"../../static/img/chao-2.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"},
-		   // 				      	{id:3,imgUrl:"../../static/img/chao-3.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"},
-		   // 				      	{id:4,imgUrl:"../../static/img/chao-4.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"},
-					// 			{id:5,imgUrl:"../../static/img/chao-1.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"},
-		   // 				      	{id:6,imgUrl:"../../static/img/chao-2.png",name:"哈哈哈好好好",pprice:"299",oprice:"599",discount:"5.2"},
-		   // 				   ]
-		   // 				   }
-		   // 			   ]
-		   // },
 		   {
 		   				  // 下面的展示
 		   				  type:"commodityList",

@@ -19,7 +19,7 @@
 				<view class="">全部订单</view>
 			</view>
 			<view class="order-list">
-				<view class="order-item">
+				<view class="order-item" @tap="waitPay">
 					<image class="order-img" src="../../static/img/buy.png" mode=""></image>
 					<view class="">待付款</view>
 				</view>
@@ -104,6 +104,11 @@
 					title: '最新版本',
 					icon: "none"
 				});
+			},
+			waitPay(){
+				uni.navigateTo({
+					url:'/pages/waitPay/waitPay'
+				})
 			},
 			toCollect(){
 				uni.navigateTo({
