@@ -21,6 +21,15 @@ router.get('/',function(req,res,next){
 	res.render('index',{title:'Express'});
 });
 
+// 待收货
+router.post('/api/getShop',function(req,res,next){
+		connection.query("select * from store_getshop", function (err, result){
+			res.send({
+				data:result
+			})
+		})
+});
+
 // 待支付
 router.post('/api/waitPay',function(req,res,next){
 		connection.query("select * from store_order", function (err, result){
@@ -38,13 +47,20 @@ router.post('/api/submitOrder',function(req,res,next){
 	let shopArr = req.body.shopArr;
 	connection.query(`select * from store_order where order_id = ${orderId}`,function(err,result){
 		//订单的id
-		let id = result[0].id
-		connection.query(`update store_order set order_status = replace(order_status,'1','2') where order_id=${id}`,function(){
+		let id = result[0].Id
+		let goods_name = result[0].goods_name
+		let goods_price = result[0].goods_price
+		let goods_num = result[0].goods_num
+		connection.query(`update store_order set order_status = replace(order_status,'1','2') where order_id=${orderId}`,function(){
 			// shopArr.forEach(v=>{
 				connection.query(`delete from goods_cart where goods_id = ${shopArr}`,function(){
 					
 				})
 				connection.query(`delete from store_order where order_id = ${orderId}`,function(){
+					
+				})
+				// 插入待收货
+				connection.query(`insert into store_getshop (uId,order_id,goods_name,goods_price,goods_num,order_status) values ('','${orderId}','${goods_name}','${goods_price}','${goods_num}','2')`,function(){
 					
 				})
 			// })
@@ -122,8 +138,7 @@ router.post('/api/addCart',function(req,res,next){
 	let goods_id = req.body.goods_id;
 	// 用户输入的商品数量
 	let num = req.body.num
-	
-	connection.query("select * from goods_search where id='"+goods_id+"'", function (err, result){
+	connection.query("select * from goods_search where Id='"+goods_id+"'", function (err, result){
 		let name = result[0].name;
 		let imgUrl = result[0].imgUrl;
 		let pprice = result[0].pprice;
@@ -131,7 +146,7 @@ router.post('/api/addCart',function(req,res,next){
 		connection.query("select * from goods_cart where goods_id='"+goods_id+"'", function (err, data){
 			if(data.length>0){
 				// 如果当前用户已经添加，则修改
-				connection.query("update goods_cart set num = replace(num,'"+data[0].num+"','"+  parseInt(num)+parseInt(data[0].num)  +"') where id = '"+goods_id+"' ",function(er,rs){
+				connection.query("update goods_cart set num = replace(num,'"+data[0].num+"','"+  parseInt(num)+parseInt(data[0].num)  +"') where Id = '"+goods_id+"' ",function(er,rs){
 					res.json({
 						data:{
 							success:"修改成功！"
@@ -192,7 +207,7 @@ router.post('/api/updateAdderss',function(req,res,next){
 	let district = req.body.district
 	let address = req.body.address
 	let isDefault = req.body.isDefault
-	let id = req.body.id
+	let id = req.body.Id
 	connection.query('update address set name = "'+name+'",tel = "'+tel+'",province = "'+province+'",city = "'+city+'",district = "'+district+'",address = "'+address+'",isDefault = "'+isDefault+'" where Id = "'+id+'" ', function (err, result){
 			res.send({
 				data:{
@@ -368,31 +383,15 @@ router.get('/api/goods/list',function(req,res,next){
 					{
 						name:"家用围裙",
 						list:[
-							{
-								id:1,
-								name:"哈哈裙",
-								imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i4/309070188/O1CN01PBrnm41DG9FdGx1A5_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",
-							},
-							{
-								id:2,
-								name:"厨房裙",
-								imgUrl:"https://picasso.alicdn.com/imgextra/O1CNA1nqrLX329VwdwaEBPY_!!3181508074-0-psf.jpg_460x460Q90.jpg_.webp",
-							}
+{Id:22,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i4/309070188/O1CN01PBrnm41DG9FdGx1A5_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",name:"哈哈裙",pprice:"19",oprice:"29",discount:"6.6"},
+{Id:23,imgUrl:"https://picasso.alicdn.com/imgextra/O1CNA1nqrLX329VwdwaEBPY_!!3181508074-0-psf.jpg_460x460Q90.jpg_.webp",name:"厨房裙",pprice:"24",oprice:"36",discount:"6"}
 						]
 					},
 					{
 						name:"家用鞋",
 						list:[
-							{
-								id:1,
-								name:"凉鞋",
-								imgUrl:"https://picasso.alicdn.com/imgextra/ad4c3d/O1CNA1Pimgrenderad4c3dO1CN01R7zFt21g3tPUdhDyj_!!0-item_pic.jpg?backup_url=O1CN01R7zFt21g3tPUdhDyj_!!0-item_pic.jpg&p_context=eyJiaXoiOiJtYWMiLCJidWNrZXRJZCI6IkMiLCJjaGFubmVsIjoid3NlYXJjaGljb24taXRlbSIsIml0ZW1JZCI6IjYxMjYyOTEyMDg2OSIsInBpY1R5cGUiOiJwMTEiLCJyZW5kZXJDb25kaXRpb24iOnt9LCJyZW5kZXJEYXRhIjp7fX0-&sign=ad4c3d522887345d8c2647de108424ce&v=4.0_460x460Q90.jpg_.webp",
-							},
-							{
-								id:2,
-								name:"毛鞋",
-								imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/3425540944/O1CN016xLg7g1IqOetDMHK1_!!0-item_pic.jpg_460x460Q90.jpg_.webp",
-							}
+{Id:24,imgUrl:"https://picasso.alicdn.com/imgextra/ad4c3d/O1CNA1Pimgrenderad4c3dO1CN01R7zFt21g3tPUdhDyj_!!0-item_pic.jpg?backup_url=O1CN01R7zFt21g3tPUdhDyj_!!0-item_pic.jpg&p_context=eyJiaXoiOiJtYWMiLCJidWNrZXRJZCI6IkMiLCJjaGFubmVsIjoid3NlYXJjaGljb24taXRlbSIsIml0ZW1JZCI6IjYxMjYyOTEyMDg2OSIsInBpY1R5cGUiOiJwMTEiLCJyZW5kZXJDb25kaXRpb24iOnt9LCJyZW5kZXJEYXRhIjp7fX0-&sign=ad4c3d522887345d8c2647de108424ce&v=4.0_460x460Q90.jpg_.webp",name:"凉鞋",pprice:"9.9",oprice:"36",discount:"6"},
+{Id:25,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/3425540944/O1CN016xLg7g1IqOetDMHK1_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"毛鞋",pprice:"14",oprice:"36",discount:"6"},
 						]
 					}
 				]
@@ -405,31 +404,15 @@ router.get('/api/goods/list',function(req,res,next){
 					{
 						name:"裙装",
 						list:[
-							{
-								id:1,
-								name:"连衣裙",
-								imgUrl:"https://g-search2.alicdn.com/img/bao/uploaded/i4/i2/2449973497/O1CN01CWvJgB1bhfpNi6EN0_!!2449973497.jpg_460x460Q90.jpg_.webp",
-							},
-							{
-								id:2,
-								name:"半生裙",
-								imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/1908020412/O1CN01NARuL31EujxyoJTxO_!!2-item_pic.png_460x460Q90.jpg_.webp",
-							}
+{Id:26,imgUrl:"https://g-search2.alicdn.com/img/bao/uploaded/i4/i2/2449973497/O1CN01CWvJgB1bhfpNi6EN0_!!2449973497.jpg_460x460Q90.jpg_.webp",name:"连衣裙",pprice:"46",oprice:"36",discount:"6"},
+{Id:27,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/1908020412/O1CN01NARuL31EujxyoJTxO_!!2-item_pic.png_460x460Q90.jpg_.webp",name:"半生裙",pprice:"65",oprice:"36",discount:"6"}
 						]
 					},
 					{
 						name:"上衣",
 						list:[
-							{
-								id:1,
-								name:"衬衣",
-								imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i3/32464494/O1CN01XJijRL1j4IhIlP7cb_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",
-							},
-							{
-								id:2,
-								name:"T恤",
-								imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/2880232099/O1CN01KOqyQe1RNNyymx1CF_!!0-item_pic.jpg_460x460Q90.jpg_.webp",
-							}
+{Id:28,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i3/32464494/O1CN01XJijRL1j4IhIlP7cb_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",name:"衬衣",pprice:"60",oprice:"36",discount:"6"},
+{Id:29,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/2880232099/O1CN01KOqyQe1RNNyymx1CF_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"T恤",pprice:"70",oprice:"36",discount:"6"}
 						]
 					}
 				]
@@ -438,34 +421,18 @@ router.get('/api/goods/list',function(req,res,next){
 				id:3,
 				name:"男装",
 				data:[
-					{
+				{
 						name:"上衣",
 						list:[
-							{
-								id:1,
-								name:"卫衣",
-								imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i3/708440003/O1CN01DGsHkd1BtPyxEfI1W_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",
-							},
-							{
-								id:2,
-								name:"嘻哈风",
-								imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/676198570/O1CN018mNuyR2DB75cNN4Ho_!!0-item_pic.jpg_460x460Q90.jpg_.webp",
-							}
+{Id:30,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i3/708440003/O1CN01DGsHkd1BtPyxEfI1W_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",name:"卫衣",pprice:"170",oprice:"36",discount:"6"},
+{Id:31,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/676198570/O1CN018mNuyR2DB75cNN4Ho_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"嘻哈风",pprice:"90",oprice:"36",discount:"6"}
 						]
 					},
 					{
 						name:"裤子",
 						list:[
-							{
-								id:1,
-								name:"工装裤",
-								imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i1/98648795/O1CN01v55Hkr2EqABwJFhJn_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",
-							},
-							{
-								id:2,
-								name:"运动裤",
-								imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/2095638804/O1CN01VFpUd62EuHkAOSmmD_!!0-item_pic.jpg_460x460Q90.jpg_.webp",
-							}
+{Id:32,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i1/98648795/O1CN01v55Hkr2EqABwJFhJn_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",name:"工装裤",pprice:"77",oprice:"36",discount:"6"},
+{Id:33,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/2095638804/O1CN01VFpUd62EuHkAOSmmD_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"运动裤",pprice:"100",oprice:"36",discount:"6"}
 						]
 					}
 				]
@@ -517,9 +484,9 @@ router.get('/api/index_list/2/data/1', function(req, res, next) {
 		   {
 			   type:"hotList",
 			   data:[
-				  {Id:1,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/3201457638/O1CN01rAfxC426IFvtVRZkh_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"超级暴汗服",pprice:"199",oprice:"299",discount:"6.6"},
-				  {Id:2,imgUrl:"https://g-search2.alicdn.com/img/bao/uploaded/i4/i1/353571709/O1CN01JY9nqj1OUlgTm9H9l_!!353571709.jpg_460x460Q90.jpg_.webp",name:"好一双跑鞋",pprice:"299",oprice:"399",discount:"7.7"},
-				  {Id:3,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/1771478330/O1CN01NkJVEW2BPBnoJzHLG_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"运动灰裤",pprice:"88",oprice:"128",discount:"8.8"}
+				  {Id:11,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/3201457638/O1CN01rAfxC426IFvtVRZkh_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"超级暴汗服",pprice:"199",oprice:"299",discount:"6.6"},
+				  {Id:12,imgUrl:"https://g-search2.alicdn.com/img/bao/uploaded/i4/i1/353571709/O1CN01JY9nqj1OUlgTm9H9l_!!353571709.jpg_460x460Q90.jpg_.webp",name:"好一双跑鞋",pprice:"299",oprice:"399",discount:"7.7"},
+				  {Id:13,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/1771478330/O1CN01NkJVEW2BPBnoJzHLG_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"运动灰裤",pprice:"88",oprice:"128",discount:"8.8"}
 			   ]
 		   },
 		   {
@@ -528,12 +495,12 @@ router.get('/api/index_list/2/data/1', function(req, res, next) {
 				   {
 				   					bigUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i3/97717357/O1CN01iiUeYy24DYQWK2q7h_!!0-saturn_solar.jpg_460x460Q90.jpg_.webp",
 				   data:[
-				      					   {Id:1,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/i3/653902181/O1CN01zdu3BA1RywafJ24Mo_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"运动帽（冬）",pprice:"49",oprice:"69",discount:"8.8"},
-				      					   {Id:2,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/67179755/O1CN01tPlqYg2LvqMJeD8li_!!67179755.jpg_460x460Q90.jpg_.webp",name:"耐克袜子",pprice:"29",oprice:"39",discount:"6.5"},
-				      					   {Id:3,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/i3/1714128138/O1CN01wrEdYq29zFzVwSg2a_!!2-item_pic.png_460x460Q90.jpg_.webp",name:"小米运动手环",pprice:"299",oprice:"599",discount:"5.2"},
-				      					   {Id:4,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/2201410209674/O1CN01qCYCEX2LKkKUxjgam_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"情侣运动装",pprice:"269",oprice:"499",discount:"6.3"},
-				      					   {Id:5,imgUrl:"https://g-search2.alicdn.com/img/bao/uploaded/i4/i4/1613724963/O1CN01ioZZVb1mX6TSzijU9_!!1613724963.jpg_460x460Q90.jpg_.webp",name:"跑步鞋",pprice:"129",oprice:"279",discount:"5.5"},
-				      					   {Id:6,imgUrl:"https://g-search2.alicdn.com/img/bao/uploaded/i4/i4/2111351203/O1CN01JcoTnZ1Kl1Fuxcwvk_!!2111351203.jpg_460x460Q90.jpg_.webp",name:"运动裤（冬）",pprice:"63",oprice:"99",discount:"6"}
+				      					   {Id:14,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/i3/653902181/O1CN01zdu3BA1RywafJ24Mo_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"运动帽（冬）",pprice:"49",oprice:"69",discount:"8.8"},
+				      					   {Id:15,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/67179755/O1CN01tPlqYg2LvqMJeD8li_!!67179755.jpg_460x460Q90.jpg_.webp",name:"耐克袜子",pprice:"29",oprice:"39",discount:"6.5"},
+				      					   {Id:16,imgUrl:"https://g-search1.alicdn.com/img/bao/uploaded/i4/i3/1714128138/O1CN01wrEdYq29zFzVwSg2a_!!2-item_pic.png_460x460Q90.jpg_.webp",name:"小米运动手环",pprice:"299",oprice:"599",discount:"5.2"},
+				      					   {Id:17,imgUrl:"https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/2201410209674/O1CN01qCYCEX2LKkKUxjgam_!!0-item_pic.jpg_460x460Q90.jpg_.webp",name:"情侣运动装",pprice:"269",oprice:"499",discount:"6.3"},
+				      					   {Id:18,imgUrl:"https://g-search2.alicdn.com/img/bao/uploaded/i4/i4/1613724963/O1CN01ioZZVb1mX6TSzijU9_!!1613724963.jpg_460x460Q90.jpg_.webp",name:"跑步鞋",pprice:"129",oprice:"279",discount:"5.5"},
+				      					   {Id:19,imgUrl:"https://g-search2.alicdn.com/img/bao/uploaded/i4/i4/2111351203/O1CN01JcoTnZ1Kl1Fuxcwvk_!!2111351203.jpg_460x460Q90.jpg_.webp",name:"运动裤（冬）",pprice:"63",oprice:"99",discount:"6"}
 				   ]
 				   }
 			   ]
@@ -543,8 +510,8 @@ router.get('/api/index_list/2/data/1', function(req, res, next) {
 		   				  // 下面的展示
 		   				  type:"commodityList",
 		   				  data:[
-		   					  {Id:1,imgUrl:"../../static/img/chao-1.png",name:"休闲风（男）",pprice:"229",oprice:"159",discount:"6.7"},
-		   					  {Id:2,imgUrl:"../../static/img/chao-2.png",name:"彩彩群",pprice:"323",oprice:"432",discount:"8.8"},
+		   					  {Id:20,imgUrl:"../../static/img/chao-1.png",name:"休闲风（男）",pprice:"229",oprice:"159",discount:"6.7"},
+		   					  {Id:21,imgUrl:"../../static/img/chao-2.png",name:"彩彩群",pprice:"323",oprice:"432",discount:"8.8"},
 		   				  ]
 		   }
 	   ]

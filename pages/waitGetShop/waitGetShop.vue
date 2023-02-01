@@ -1,7 +1,7 @@
 <template>
 	<view class="config-order bg-active-color" >
 		<view class="wait">
-			<h3>等待付款</h3>
+			<h3>等待发货</h3>
 		</view>
 		<Lines></Lines>
 		<!-- 商品 -->
@@ -40,7 +40,7 @@
 		},
 		onLoad(e){
 			$http.request({
-				url:"/waitPay",
+				url:"/getShop",
 				method:"POST",
 			}).then((res)=>{
 				this.goodsList = res

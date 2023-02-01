@@ -23,7 +23,11 @@
 				<block v-for="(k,i) in item" :key="i">
 					<view class="list-title">{{k.name}}</view>
 					<view class="right-content">
-						<view class="right-item" v-for="(j,idx) in k.list" :key="idx">
+						<view class="right-item" 
+						v-for="(j,idx) in k.list" 
+						:key="idx"
+						@tap="goDetails(j.Id)"
+						>
 							<image class="right-image" :src="j.imgUrl" mode=""></image>
 							<view class="right-name">{{j.name}}</view>
 						</view>
@@ -61,6 +65,11 @@
 			this.getData()
 		},
 		methods: {
+			goDetails(Id){
+				uni.navigateTo({
+					url:'../../pages/detail/detail?id='+Id+''
+				})
+			},
 			// 左侧点击事件
 			changeLeftTap(index,id){
 				// 先拿到id才能获取

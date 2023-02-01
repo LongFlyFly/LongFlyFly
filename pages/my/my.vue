@@ -23,7 +23,7 @@
 					<image class="order-img" src="../../static/img/buy.png" mode=""></image>
 					<view class="">待付款</view>
 				</view>
-				<view class="order-item">
+				<view class="order-item" @tap="toGetShop">
 					<image class="order-img" src="../../static/img/sendbuy.png" mode=""></image>
 					<view class="">待发货</view>
 				</view>
@@ -50,7 +50,7 @@
 					<view class=""> > </view>
 				</view>
 				
-				<view class="my-content-item">
+				<view class="my-content-item" @tap="toGetShop">
 					<view class="">交易记录</view>
 					<view class=""> > </view>
 				</view>
@@ -104,6 +104,11 @@
 					title: '最新版本',
 					icon: "none"
 				});
+			},
+			toGetShop(){
+				uni.navigateTo({
+					url:'/pages/waitGetShop/waitGetShop'
+				})
 			},
 			waitPay(){
 				uni.navigateTo({

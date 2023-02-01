@@ -286,6 +286,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/waitGetShop/waitGetShop",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "待发货",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
